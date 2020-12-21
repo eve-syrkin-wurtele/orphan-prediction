@@ -1,18 +1,19 @@
-# Gene prediction and optimization using BIND and MIND workflows:
+# Gene prediction and optimization incorporating BIND and MIND workflows:
 
 ## Overview of MIND and BIND:
 
 **MIND**: _ab initio_ gene predictions by **M**AKER combined with gene predictions **IN**ferred **D**irectly from alignment of RNA-Seq evidence to the genome.
 **BIND**: _ab initio_ gene predictions by **B**RAKER combined with gene predictions **IN**ferred **D**irectly from alignment of RNA-Seq evidence to the genome.
 
-1. Find an Orphan-Enriched RNA-Seq dataset from NCBI-SRA:
+1. Before you use the pipeline: Identify a diverse, orphan-enriched RNA-Seq dataset from NCBI-SRA:
 	- Search RNA-Seq datasets for your organism on NCBI, filter Runs (SRR) for Illumina, paired-end, HiSeq 2500 or newer.
-	- Download Runs from NCBI (SRA-toolkit)
-	- If existing annotations is available, expression quantification is done against every gene using every SRR with Kallisto.
-	- run phylostratR on current gene models to infer phylostrata of each gene model
-	- Rank the SRRs with highest number of expressed orphans and select feasible amounts of data to work with.
+	- Download Runs from NCBI (SRA-toolkit, https://www.ncbi.nlm.nih.gov/sra)
+	- If gene existing annotations are available: 
+	       -expression quantification is done against every gene using every SRR with Kallisto.  ****Arun, I am not sure what this means?
+	      -run phylostratR (https://doi.org/10.1093/bioinformatics/btz171) on existing gene models to infer phylostrata of each gene model
+	- Rank the SRRs (runs) with highest number of expressed orphans and select feasible amounts of SRR with high numbers of expressed orphans to work with.
 
-	If NCBI-SRA has no samples for your organism, and you are relying solely on RNA-Seq that you generate yourself, best practice is to maximize representation of all genes by including conditions like reproductive tissues and stresses in which orphan gene expression is high.
+	If NCBI-SRA has no RNA-Seq samples of your organism, and you are relying solely on RNA-Seq that you generate yourself, best practice is to maximize representation of all genes by including diverse conditions such as reproductive tissues and stresses, in which orphan gene expression is often high.
 
 2. Run BRAKER
 	- Align RNA-Seq with splice aware aligner (STAR or HiSat2 preferred, HiSat2 used here)
